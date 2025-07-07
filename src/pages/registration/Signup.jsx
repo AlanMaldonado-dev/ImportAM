@@ -1,3 +1,4 @@
+
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import myContext from "../../context/myContext";
@@ -22,11 +23,16 @@ const Signup = () => {
         role: "user"
     });
 
+    /**========================================================================
+     *                          User Signup Function 
+    *========================================================================**/
+
     const userSignupFunction = async () => {
         // validation 
         if (userSignup.name === "" || userSignup.email === "" || userSignup.password === "") {
             toast.error("All Fields are required")
         }
+
         setLoading(true);
         try {
             const users = await createUserWithEmailAndPassword(auth, userSignup.email, userSignup.password);
@@ -122,11 +128,18 @@ const Signup = () => {
                         placeholder='Password'
                         value={userSignup.password}
                         onChange={(e) => {
+                            const password = e.target.value;
                             setUserSignup({
                                 ...userSignup,
                                 password: e.target.value
                             })
+                            if (password.length < 6 && password.length > 0) {
+                            // Muestra mensaje solo si ha escrito algo pero es muy corto
+                            // Puedes usar un estado local como setErrorPassword('...') si prefieres controlarlo tú
+                            toast.error("La contraseña debe tener al menos 6 caracteres", { id: "password-short" });
+                            }
                         }}
+                        
                         className='bg-pink-50 border border-pink-200 px-2 py-2 w-96 rounded-md outline-none placeholder-pink-200'
                     />
                 </div>
