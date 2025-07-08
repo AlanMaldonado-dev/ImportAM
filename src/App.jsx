@@ -45,8 +45,16 @@ const App = () => {
                 <AdminDashboard/>
               </ProtectedRouteForAdmin>
             } />
-            <Route path="/addProduct" element={<AddProductPage />} />
-            <Route path="/updateProduct" element={<UpdateProductPage />} />
+            <Route path="/addProduct" element={
+              <ProtectedRouteForAdmin>
+                <AddProductPage/>
+              </ProtectedRouteForAdmin>
+            } />
+            <Route path="/updateproduct/:id" element={
+              <ProtectedRouteForAdmin>
+                <UpdateProductPage/>
+              </ProtectedRouteForAdmin>
+            } />
           </Routes>
           <Toaster/>
         </Router>
