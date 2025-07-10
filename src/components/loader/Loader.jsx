@@ -1,6 +1,9 @@
+
+import React from 'react'
+
 const Loader = () => {
-    return (
-        <div role="status" className=" absolute">
+  return (
+    <div role="status" className=" absolute">
             <svg
                 aria-hidden="true"
                 className="w-8 h-8 mr-2 text-pink-200 animate-spin fill-pink-500"
@@ -19,7 +22,7 @@ const Loader = () => {
             </svg>
             <span className="sr-only">Loading...</span>
         </div>
-    );
+  )
 }
 
-export default Loader;
+export default Loader
