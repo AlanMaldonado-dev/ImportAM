@@ -38,7 +38,7 @@ const ProductInfo = () => {
             <section className="py-5 lg:py-16 font-poppins dark:bg-gray-800">
                 {loading ?
                     <>
-                        <div className="flex justify-center items-center">
+                        <div className="flex justify-center items-center h-full">
                             <Loader />
                         </div>
                     </>
