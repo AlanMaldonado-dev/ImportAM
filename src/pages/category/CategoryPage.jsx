@@ -6,7 +6,7 @@ import Loader from "../../components/loader/Loader";
 
 const CategoryPage = () => {
     const { categoryname } = useParams();
-
+    console.log(categoryname)
     const context = useContext(myContext);
     const { getAllProduct, loading } = context;
 
