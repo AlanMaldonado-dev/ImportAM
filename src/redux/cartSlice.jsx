@@ -1,40 +1,46 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = [];
 
-export const cartSlice = createSlice({
-    name: 'cart',
-    initialState,
-    reducers: {
-        addToCart(state, action) {
-            state.push(action.payload)
-        },
-        deleteFromCart(state, action) {
-            return state.filter(item => item.id != action.payload.id);
-        },
-        incrementQuantity: (state, action) => {
-            state = state.map(item => {
-                if (item.id === action.payload) {
-                    item.quantity++;
-                }
-                return item;
-            });
-        },
-        decrementQuantity: (state, action) => {
-            state = state.map(item => {
-                if (item.quantity !== 1) {
-                    if (item.id === action.payload) {
-                        item.quantity--;
-                    }
-                }
-                return item;
-
-            })
-        },
+const cartSlice = createSlice({
+  name: 'cart',
+  initialState,
+  reducers: {
+    // Añadir producto al carrito (si ya existe, no lo duplica)
+    addToCart(state, action) {
+      const existingItem = state.find(item => item.id === action.payload.id);
+      if (!existingItem) {
+        state.push({ ...action.payload, quantity: 1 });
+      }
     },
-})
 
-// Action creators are generated for each case reducer function
-export const { addToCart, deleteFromCart, incrementQuantity, decrementQuantity } = cartSlice.actions
+    // Eliminar producto del carrito
+   deleteFromCart: (state, action) => {
+            return state.filter((item) => item.id !== action.payload);
+        },
 
-export default cartSlice.reducer
+    // Incrementar cantidad
+    incrementQuantity(state, action) {
+      return state.map(item =>
+        item.id === action.payload
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      );
+    },
+
+    // Decrementar cantidad (mínimo 1)
+    decrementQuantity(state, action) {
+      return state.map(item =>
+        item.id === action.payload && item.quantity > 1
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      );
+    },
+  },
+});
+
+// Exportar acciones
+export const { addToCart, deleteFromCart, incrementQuantity, decrementQuantity } = cartSlice.actions;
+
+// Exportar reducer
+export default cartSlice.reducer;

@@ -1,12 +1,14 @@
 import { useNavigate, useParams } from "react-router";
 import Layout from "../../components/layout/Layout";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import myContext from "../../context/myContext";
 import Loader from "../../components/loader/Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, deleteFromCart } from "../../redux/cartSlice";
+import toast from "react-hot-toast";
 
 const CategoryPage = () => {
     const { categoryname } = useParams();
-    console.log(categoryname)
     const context = useContext(myContext);
     const { getAllProduct, loading } = context;
 
@@ -14,7 +16,31 @@ const CategoryPage = () => {
 
     // filter product 
     const filterProduct = getAllProduct.filter((obj)=> obj.category.includes(categoryname));
-    // console.log(filterProduct)
+    
+    const cartItems = useSelector((state) => state.cart);
+    const dispatch = useDispatch();
+
+    const addCart = (item) => {
+  const sanitizedItem = {
+    id: item.id,
+    title: item.title,
+    price: item.price,
+    productImageUrl: item.productImageUrl,
+  };
+
+  dispatch(addToCart(sanitizedItem));
+  toast.success("Producto añadido al carrito");
+};
+
+    const deleteCart = (item) => {
+    // Solo pasamos el ID del producto al dispatch
+    dispatch(deleteFromCart(item.id));
+    toast.success("Producto eliminado del carrito");
+};
+
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cartItems));
+    }, [cartItems])
     return (
         <Layout>
             <div className="mt-10">
@@ -60,11 +86,26 @@ const CategoryPage = () => {
                                                                 ₹{price}
                                                             </h1>
 
-                                                            <div className="flex justify-center ">
-                                                                <button className=" bg-pink-500 hover:bg-pink-600 w-full text-white py-[4px] rounded-lg font-bold">
-                                                                    Add To Cart
-                                                                </button>
-                                                            </div>
+                                                            <div
+                                                                    className="flex justify-center ">
+                                                                    {cartItems.some((p) => p.id === item.id)
+
+                                                                        ?
+                                                                        <button
+                                                                            onClick={() => deleteCart(item)}
+                                                                            className=" bg-red-700 hover:bg-pink-600 w-full text-white py-[4px] rounded-lg font-bold">
+                                                                        Delete from cart
+                                                                        </button>
+
+                                                                        :
+
+                                                                        <button
+                                                                            onClick={() => addCart(item)}
+                                                                            className=" bg-pink-500 hover:bg-pink-600 w-full text-white py-[4px] rounded-lg font-bold">
+                                                                        Add to cart
+                                                                        </button>
+                                                                    }
+                                                                </div>
                                                         </div>
                                                     </div>
                                                 </div>
