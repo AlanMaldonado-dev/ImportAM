@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "../searchBar/SearchBar";
 import { useSelector } from "react-redux";
-
+import { Home, Search, Bell, User } from 'lucide-react';
 
 const Navbar = () => {
     // get user from localStorage 
@@ -53,7 +53,7 @@ const Navbar = () => {
 
             {/* logout */}
             {user && <li className=" cursor-pointer" onClick={logout}>
-                logout
+                Logout
             </li>}
 
             {/* Cart */}
@@ -61,6 +61,9 @@ const Navbar = () => {
                 <Link to={'/cart'}>
                     Cart({cartItems.length})
                 </Link>
+            </li>
+            <li className="ml-20">
+                <SearchBar />
             </li>
         </ul>
     )
@@ -71,17 +74,15 @@ const Navbar = () => {
                 {/* left  */}
                 <div className="left py-3 lg:py-0">
                     <Link to={'/'}>
-                        <h2 className=" font-bold text-white text-2xl text-center">E-Bharat</h2>
+                        <h2 className=" font-bold text-white text-2xl text-center">Talos</h2>
                     </Link>
                 </div>
 
                 {/* right  */}
-                <div className="right flex justify-center mb-4 lg:mb-0">
+                <div className="flex justify-center align-center ">
                     {navList}
                 </div>
 
-                {/* Search Bar  */}
-                <SearchBar />
             </div>
         </nav>
     );
