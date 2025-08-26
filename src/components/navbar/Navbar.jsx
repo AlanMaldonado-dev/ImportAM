@@ -23,12 +23,12 @@ const Navbar = () => {
         <ul className="flex space-x-3 text-white font-medium text-md px-5 ">
             {/* Home */}
             <li>
-                <Link to={'/'}>Home</Link>
+                <Link to={'/'}>Inicio</Link>
             </li>
 
             {/* All Product */}
             <li>
-                <Link to={'/allproduct'}>All Product</Link>
+                <Link to={'/allproduct'}>Productos</Link>
             </li>
 
             {/* Signup */}
@@ -58,9 +58,12 @@ const Navbar = () => {
 
             {/* Cart */}
             <li>
-                <Link to={'/cart'}>
-                    Cart({cartItems.length})
-                </Link>
+                <Link to="/cart" className="cart-link pr-2">
+  🛒
+  {cartItems.length > 0 && (
+    <span className="cart-badge"><span className="bg-[#Fc4b08] rounded-2xl p-1 text-xs ">{cartItems.length}</span></span>
+  )}
+</Link>
             </li>
             <li className="ml-20">
                 <SearchBar />
@@ -68,13 +71,13 @@ const Navbar = () => {
         </ul>
     )
     return (
-        <nav className="bg-[#003366] sticky top-0">
+        <nav className="bg-[#000000] sticky top-0">
             {/* main  */}
             <div className="lg:flex lg:justify-between items-center py-3 lg:px-3 ">
                 {/* left  */}
                 <div className="left py-3 lg:py-0">
                     <Link to={'/'}>
-                        <h2 className=" font-bold text-white text-2xl text-center">Talos</h2>
+                        <h2 className=" font-bold text-white text-2xl text-center">Nebula</h2>
                     </Link>
                 </div>
 

@@ -29,16 +29,16 @@ const ProductCard = ({ item }) => {
 
   return (
     <div className="p-4 w-full md:w-1/4">
-      <div className="h-full border border-gray-300 rounded-xl overflow-hidden shadow-md cursor-pointer bg-[#F5F7FA]">
+      <div className="h-full border p-4 border-gray-300 rounded-xl overflow-hidden shadow-md cursor-pointer bg-[#F5F7FA]">
         <img
           onClick={() => navigate(`/productinfo/${item.id}`)}
-          className="lg:h-60 h-60 w-full object-cover"
+          className="h-[250px] w-[150px] w-full object-cover"
           src={item.productImageUrl}
           alt={item.title}
         />
         <div className="p-6">
           <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-            ImportAM
+            Nebula Vapes
           </h2>
           <h1 className="title-font text-md font-medium text-gray-900 mb-2">
             {item.title.substring(0, 25)}
@@ -51,16 +51,16 @@ const ProductCard = ({ item }) => {
             {isInCart ? (
               <button
                 onClick={() => deleteCart(item)}
-                className="bg-[#00C896] w-full text-white py-[4px] rounded-lg font-bold"
+                className="bg-[#ff2301] w-full text-white py-[4px] rounded-lg font-bold"
               >
-                Delete from Cart
+                Borrar
               </button>
             ) : (
               <button
                 onClick={() => addCart(item)}
-                className="bg-[#007BFF] w-full text-white py-[4px] rounded-lg font-bold"
+                className="bg-[#fc4b08] w-full text-white py-[4px] rounded-lg font-bold"
               >
-                Add to Cart
+                Agregar al carrito
               </button>
             )}
           </div>

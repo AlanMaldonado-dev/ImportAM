@@ -8,6 +8,7 @@ import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { fireDB } from "../../firebase/FirebaseConfig";
 import BuyNowModal from "../../components/buyNowModal/BuyNowModal";
 import { Navigate } from "react-router";
+import { Button } from "@material-tailwind/react";
 
 const CartPage = () => {
     const cartItems = useSelector((state) => state.cart);
@@ -95,12 +96,12 @@ const CartPage = () => {
             <div className="container mx-auto px-4 max-w-7xl px-2 lg:px-0">
                 <div className="mx-auto max-w-2xl py-8 lg:max-w-7xl">
                     <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                        Shopping Cart
+                        Carrito
                     </h1>
                     <form className="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
                         <section aria-labelledby="cart-heading" className="rounded-lg bg-white lg:col-span-8">
                             <h2 id="cart-heading" className="sr-only">
-                                Items in your shopping cart
+                                Productos agregados
                             </h2>
                             <ul role="list" className="divide-y divide-gray-200">
                                 {cartItems.length > 0 ?
@@ -168,7 +169,9 @@ const CartPage = () => {
                                     </>
                                     :
 
-                                    <h1>Not Found</h1>}
+                                    <div className="h-[100px] flex justify-center items-center">
+                                        <h1>No hay productos en el carrito</h1>
+                                    </div>}
                             </ul>
                         </section>
                         {/* Order summary */}
@@ -186,17 +189,17 @@ const CartPage = () => {
                                 <dl className=" space-y-1 px-2 py-4">
                                     <div className="flex items-center justify-between">
                                         <dt className="text-sm text-gray-800">Price ({cartItemTotal} item)</dt>
-                                        <dd className="text-sm font-medium text-gray-900">₹ {cartTotal}</dd>
+                                        <dd className="text-sm font-medium text-gray-900">$ {cartTotal}</dd>
                                     </div>
                                     <div className="flex items-center justify-between py-4">
                                         <dt className="flex text-sm text-gray-800">
-                                            <span>Delivery Charges</span>
+                                            <span>Envio</span>
                                         </dt>
-                                        <dd className="text-sm font-medium text-green-700">Free</dd>
+                                        <dd className="text-sm font-medium text-green-700">$0</dd>
                                     </div>
                                     <div className="flex items-center justify-between border-y border-dashed py-4 ">
-                                        <dt className="text-base font-medium text-gray-900">Total Amount</dt>
-                                        <dd className="text-base font-medium text-gray-900">₹ {cartTotal}</dd>
+                                        <dt className="text-base font-medium text-gray-900">Total</dt>
+                                        <dd className="text-base font-medium text-gray-900">$ {cartTotal}</dd>
                                     </div>
                                 </dl>
                                 <div className="px-2 pb-4 font-medium text-green-700">
