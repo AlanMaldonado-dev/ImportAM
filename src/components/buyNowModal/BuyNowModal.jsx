@@ -15,12 +15,12 @@ const BuyNowModal = ({ addressInfo, setAddressInfo, buyNowFunction }) => {
             <Button
                 type="button"
                 onClick={handleOpen}
-                className="w-full px-4 py-3 text-center text-gray-100 bg-[#fc4b08] border border-gray-400 dark:border-gray-700 hover:border-grey-400 hover:text-black  rounded-xl cursor-pointer"
+                className="w-full px-4 py-3 text-center text-gray-100 bg-blue-600 border border-transparent dark:border-gray-700 hover:border-blue-500 hover:text-blue-700 hover:bg-blue-100 rounded-xl"
             >
-                Completar compra
+                Comprar ahora
             </Button>
-            <Dialog open={open} handler={handleOpen} className="flex justify-center bg-gray-800">
-                <DialogBody className="w-[350px]">
+            <Dialog open={open} handler={handleOpen} className=" bg-blue-50">
+                <DialogBody className="">
                     <div className="mb-3">
                         <input
                             type="text"
@@ -32,8 +32,8 @@ const BuyNowModal = ({ addressInfo, setAddressInfo, buyNowFunction }) => {
                                     name: e.target.value
                                 })
                             }}
-                            placeholder='Nombre'
-                            className='bg-pink-50 border border-[#fc4b08] px-2 py-2 w-full rounded-md outline-none text-black placeholder-black'
+                            placeholder='Enter your name'
+                            className='bg-blue-50 border border-blue-200 px-2 py-2 w-full rounded-md outline-none text-blue-600 placeholder-blue-300'
                         />
                     </div>
                     <div className="mb-3">
@@ -47,8 +47,8 @@ const BuyNowModal = ({ addressInfo, setAddressInfo, buyNowFunction }) => {
                                     address: e.target.value
                                 })
                             }}
-                            placeholder='Direccion'
-                            className='bg-pink-50 border border-[#fc4b08] px-2 py-2 w-full rounded-md outline-none text-black placeholder-black'
+                            placeholder='Enter your address'
+                            className='bg-blue-50 border border-blue-200 px-2 py-2 w-full rounded-md outline-none text-blue-600 placeholder-blue-300'
                         />
                     </div>
 
@@ -63,8 +63,8 @@ const BuyNowModal = ({ addressInfo, setAddressInfo, buyNowFunction }) => {
                                     pincode: e.target.value
                                 })
                             }}
-                            placeholder='Codigo postal'
-                            className='bg-pink-50 border border-[#fc4b08] px-2 py-2 w-full rounded-md outline-none text-black text-black placeholder-black'
+                            placeholder='Enter your pincode'
+                            className='bg-blue-50 border border-blue-200 px-2 py-2 w-full rounded-md outline-none text-blue-600  placeholder-blue-300'
                         />
                     </div>
 
@@ -79,8 +79,8 @@ const BuyNowModal = ({ addressInfo, setAddressInfo, buyNowFunction }) => {
                                     mobileNumber: e.target.value
                                 })
                             }}
-                            placeholder='Numero de teléfono'
-                            className='bg-pink-50 border border-[#fc4b08] px-2 py-2 w-full rounded-md outline-none text-black placeholder-black'
+                            placeholder='Enter your mobileNumber'
+                            className='bg-blue-50 border border-blue-200 px-2 py-2 w-full rounded-md outline-none text-blue-600 placeholder-blue-300'
                         />
                     </div>
 
@@ -92,9 +92,9 @@ const BuyNowModal = ({ addressInfo, setAddressInfo, buyNowFunction }) => {
                                 handleOpen();
                                 buyNowFunction();
                             }}
-                            className="w-full px-4 py-3 text-center text-gray-100 bg-[#fc4b08] border border-transparent dark:border-gray-700 rounded-lg"
+                            className="w-full px-4 py-3 text-center text-gray-100 bg-blue-600 border border-transparent dark:border-gray-700 rounded-lg"
                         >
-                            Buy now
+                            Iniciar pedido
                         </Button>
                     </div>
 

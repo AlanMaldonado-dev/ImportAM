@@ -28,17 +28,17 @@ const ProductCard = ({ item }) => {
   const isInCart = cartItems.some((p) => p.id === item.id);
 
   return (
-    <div className="p-4 w-full md:w-1/4">
-      <div className="h-full border p-4 border-gray-300 rounded-xl overflow-hidden shadow-md cursor-pointer bg-[#F5F7FA]">
+    <div className="p-4 w-1/2 md:w-1/4">
+      <div className="h-full border border-gray-300 rounded-xl overflow-hidden shadow-md cursor-pointer bg-[#F5F7FA] p-2.5" >
         <img
           onClick={() => navigate(`/productinfo/${item.id}`)}
-          className="h-[250px] w-[150px] w-full object-cover"
+          className="lg:h-60 h-62 w-full object-cover"
           src={item.productImageUrl}
           alt={item.title}
         />
         <div className="p-6">
           <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-            Nebula Vapes
+            Nebula Shop
           </h2>
           <h1 className="title-font text-md font-medium text-gray-900 mb-2">
             {item.title.substring(0, 25)}
@@ -51,9 +51,9 @@ const ProductCard = ({ item }) => {
             {isInCart ? (
               <button
                 onClick={() => deleteCart(item)}
-                className="bg-[#ff2301] w-full text-white py-[4px] rounded-lg font-bold"
+                className="bg-[#dc3545] w-full text-white py-[4px] rounded-lg font-bold"
               >
-                Borrar
+                Borrar del carrito
               </button>
             ) : (
               <button

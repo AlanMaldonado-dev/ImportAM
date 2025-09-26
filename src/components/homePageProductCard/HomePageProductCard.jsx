@@ -13,7 +13,7 @@ const HomePageProductCard = () => {
         <div className="mt-10">
             {/* Heading  */}
             <div className="">
-                <h1 className=" text-center mb-5 text-2xl font-semibold">Bestselling Products</h1>
+                <h1 className=" text-center mb-5 text-2xl font-semibold">Productos</h1>
             </div>
 
             {/* main  */}

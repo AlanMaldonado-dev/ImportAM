@@ -2,6 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "../searchBar/SearchBar";
 import { useSelector } from "react-redux";
 import { Home, Search, Bell, User } from 'lucide-react';
+import './navbar.css'
+import { FaShoppingCart } from 'react-icons/fa';
 
 const Navbar = () => {
     // get user from localStorage 
@@ -20,7 +22,7 @@ const Navbar = () => {
 
     // navList Data
     const navList = (
-        <ul className="flex space-x-3 text-white font-medium text-md px-5 ">
+        <ul className="flex space-x-3 text-white font-medium text-md px-5 items-center">
             {/* Home */}
             <li>
                 <Link to={'/'}>Inicio</Link>
@@ -33,12 +35,12 @@ const Navbar = () => {
 
             {/* Signup */}
             {!user ? <li>
-                <Link to={'/signup'}>Signup</Link>
+                <Link to={'/signup'}>Registrarse</Link>
             </li> : ""}
 
             {/* Signup */}
             {!user ? <li>
-                <Link to={'/login'}>Login</Link>
+                <Link to={'/login'}>Iniciar Sesión</Link>
             </li> : ""}
 
             {/* User */}
@@ -53,17 +55,14 @@ const Navbar = () => {
 
             {/* logout */}
             {user && <li className=" cursor-pointer" onClick={logout}>
-                Logout
+                Salir 
             </li>}
 
             {/* Cart */}
             <li>
-                <Link to="/cart" className="cart-link pr-2">
-  🛒
-  {cartItems.length > 0 && (
-    <span className="cart-badge"><span className="bg-[#Fc4b08] rounded-2xl p-1 text-xs ">{cartItems.length}</span></span>
-  )}
-</Link>
+                <Link to={'/cart'} className="flex justify-center align-center">
+                    <FaShoppingCart size={15} color="#fff" /><span className="item-counter">{cartItems.length}</span>
+                </Link>
             </li>
             <li className="ml-20">
                 <SearchBar />
@@ -77,7 +76,7 @@ const Navbar = () => {
                 {/* left  */}
                 <div className="left py-3 lg:py-0">
                     <Link to={'/'}>
-                        <h2 className=" font-bold text-white text-2xl text-center">Nebula</h2>
+                        <h2 className=" font-bold text-white text-2xl text-center">Nebula Shop</h2>
                     </Link>
                 </div>
 

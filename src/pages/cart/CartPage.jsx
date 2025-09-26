@@ -8,14 +8,15 @@ import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { fireDB } from "../../firebase/FirebaseConfig";
 import BuyNowModal from "../../components/buyNowModal/BuyNowModal";
 import { Navigate } from "react-router";
-import { Button } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom"; // 👈 Añade esto
+import { clearCart } from "../../redux/cartSlice"; // 👈 Añade esto (crearemos esta acción)
 
 const CartPage = () => {
     const cartItems = useSelector((state) => state.cart);
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
     const deleteCart = (item) => {
-        dispatch(deleteFromCart(item));
+        dispatch(deleteFromCart(item.id));
         toast.success("Delete cart")
     }
 
@@ -55,45 +56,99 @@ const CartPage = () => {
             }
         )
     });
-    const buyNowFunction = () => {
-        // validation 
-        if (addressInfo.name === "" || addressInfo.address === "" || addressInfo.pincode === "" || addressInfo.mobileNumber === "") {
-            return toast.error("All Fields are required")
-        }
+    // const buyNowFunction = () => {
+    //     // validation 
+    //     if (addressInfo.name === "" || addressInfo.address === "" || addressInfo.pincode === "" || addressInfo.mobileNumber === "") {
+    //         return toast.error("All Fields are required")
+    //     }
 
-        // Order Info 
-        const orderInfo = {
-            cartItems,
-            addressInfo,
-            email: user.email,
-            userid: user.uid,
-            status: "confirmed",
-            time: Timestamp.now(),
-            date: new Date().toLocaleString(
-                "en-US",
-                {
-                    month: "short",
-                    day: "2-digit",
-                    year: "numeric",
-                }
-            )
-        }
-        try {
-            const orderRef = collection(fireDB, 'order');
-            addDoc(orderRef, orderInfo);
-            setAddressInfo({
-                name: "",
-                address: "",
-                pincode: "",
-                mobileNumber: "",
-            })
-            toast.success("Order Placed Successfull")
-        } catch (error) {
-            console.log(error)
-        }}
+    //     // Order Info 
+    //     const orderInfo = {
+    //         cartItems,
+    //         addressInfo,
+    //         email: user.email,
+    //         userid: user.uid,
+    //         status: "confirmed",
+    //         time: Timestamp.now(),
+    //         date: new Date().toLocaleString(
+    //             "en-US",
+    //             {
+    //                 month: "short",
+    //                 day: "2-digit",
+    //                 year: "numeric",
+    //             }
+    //         )
+    //     }
+    //     try {
+    //         const orderRef = collection(fireDB, 'order');
+    //         addDoc(orderRef, orderInfo);
+    //         setAddressInfo({
+    //             name: "",
+    //             address: "",
+    //             pincode: "",
+    //             mobileNumber: "",
+    //         })
+    //         toast.success("Order Placed Successfull")
+    //     } catch (error) {
+    //         console.log(error)
+    //     }}
+    const buyNowFunction = () => {
+  // Validación
+  if (addressInfo.name === "" || addressInfo.address === "" || addressInfo.pincode === "" || addressInfo.mobileNumber === "") {
+    return toast.error("All Fields are required");
+  }
+
+  // Guardar en Firebase
+  const orderInfo = {
+    cartItems,
+    addressInfo,
+    email: user.email,
+    userid: user.uid,
+    status: "confirmed",
+    time: Timestamp.now(),
+    date: new Date().toLocaleString("en-US", {
+      month: "short",
+      day: "2-digit",
+      year: "numeric",
+    }),
+  };
+
+  try {
+    const orderRef = collection(fireDB, 'order');
+    addDoc(orderRef, orderInfo);
+
+    // ✅ ENVIAR MENSAJE A TU WHATSAPP (vendedor)
+    const sellerNumber = "+5492615047787"; // 👈 TU número con código de país (sin +, sin 0, sin espacios)
+
+    let message = `¡Nuevo pedido en Nebula Shop! \n\n`;
+    message += `Cliente: ${addressInfo.name}\n`;
+    message += `Email: ${user.email}\n`;
+    message += `Teléfono: ${addressInfo.mobileNumber}\n`;
+    message += `Dirección: ${addressInfo.address}, CP: ${addressInfo.pincode}\n\n`;
+    message += `Productos:\n`;
+    cartItems.forEach(item => {
+      message += `- ${item.title} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}\n`;
+    });
+    message += `\nTotal: $${cartTotal.toFixed(2)}\n`;
+    message += `Fecha: ${orderInfo.date}`;
+
+    // Abrir WhatsApp
+    window.open(`https://wa.me/${sellerNumber}?text=${encodeURIComponent(message)}`, '_blank');
+
+    // Reset y notificación
+    setAddressInfo({ name: "", address: "", pincode: "", mobileNumber: "" });
+dispatch(clearCart()); // Vacía el estado de Redux
+      navigate('/');
+
+    toast.success("¡Pedido confirmado! Revisa WhatsApp.");
+  } catch (error) {
+    console.error(error);
+    toast.error("Error al procesar el pedido");
+  }
+};
     return (
         <Layout>
-            <div className="container mx-auto px-4 max-w-7xl px-2 lg:px-0">
+            <div className="container mx-auto max-w-7xl px-2 lg:px-0">
                 <div className="mx-auto max-w-2xl py-8 lg:max-w-7xl">
                     <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                         Carrito
@@ -107,10 +162,10 @@ const CartPage = () => {
                                 {cartItems.length > 0 ?
 
                                     <>
-                                        {cartItems.map((item, index) => {
+                                        {cartItems.map((item) => {
                                             const { id, title, price, productImageUrl, quantity, category } = item
                                             return (
-                                                <div key={index} className="">
+                                                <div key={id} className="">
                                                     <li className="flex py-6 sm:py-6 ">
                                                         <div className="flex-shrink-0">
                                                             <img
@@ -135,21 +190,21 @@ const CartPage = () => {
                                                                     </div>
                                                                     <div className="mt-1 flex items-end">
                                                                         <p className="text-sm font-medium text-gray-900">
-                                                                            ₹{price}
+                                                                            ${price}
                                                                         </p>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </li>
-                                                    <div className="mb-2 flex">
-                                                        <div className="min-w-24 flex">
+                                                    <div className="mb-2 flex p-4">
+                                                        <div className="min-w-24 flex border-2 border-blue-400 rounded-xl">
                                                             <button onClick={() => handleDecrement(id)} type="button" className="h-7 w-7" >
                                                                 -
                                                             </button>
                                                             <input
                                                                 type="text"
-                                                                className="mx-1 h-7 w-9 rounded-md border text-center"
+                                                                className="mx-1 h-7 w-9 text-center"
                                                                 value={quantity}
                                                             />
                                                             <button onClick={() => handleIncrement(id)} type="button" className="flex h-7 w-7 items-center justify-center">
@@ -158,8 +213,9 @@ const CartPage = () => {
                                                         </div>
                                                         <div className="ml-6 flex text-sm">
                                                             <button onClick={() => deleteCart(item)} type="button" className="flex items-center space-x-1 px-2 py-1 pl-0">
-                                                                <Trash size={12} className="text-red-500" />
-                                                                <span className="text-xs font-medium text-red-500">Remove</span>
+                                                                <Trash size={16} className="text-red-800
+                                                                " />
+                                                                <span className="font-medium text-red-800">Eliminar</span>
                                                             </button>
                                                         </div>
                                                     </div>
@@ -183,19 +239,13 @@ const CartPage = () => {
                                 id="summary-heading"
                                 className=" border-b border-gray-200 px-4 py-3 text-lg font-medium text-gray-900 sm:p-4"
                             >
-                                Price Details
+                                Detalle
                             </h2>
                             <div>
                                 <dl className=" space-y-1 px-2 py-4">
                                     <div className="flex items-center justify-between">
-                                        <dt className="text-sm text-gray-800">Price ({cartItemTotal} item)</dt>
-                                        <dd className="text-sm font-medium text-gray-900">$ {cartTotal}</dd>
-                                    </div>
-                                    <div className="flex items-center justify-between py-4">
-                                        <dt className="flex text-sm text-gray-800">
-                                            <span>Envio</span>
-                                        </dt>
-                                        <dd className="text-sm font-medium text-green-700">$0</dd>
+                                        <dt className="text-sm text-gray-800">Precio ({cartItemTotal} item)</dt>
+                                        <dd className="text-sm font-medium text-gray-900">${cartTotal}</dd>
                                     </div>
                                     <div className="flex items-center justify-between border-y border-dashed py-4 ">
                                         <dt className="text-base font-medium text-gray-900">Total</dt>

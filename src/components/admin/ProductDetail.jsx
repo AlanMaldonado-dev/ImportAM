@@ -28,10 +28,10 @@ const ProductDetail = () => {
         <div>
             <div className="py-5 flex justify-between items-center">
                 {/* text  */}
-                <h1 className=" text-xl text-pink-300 font-bold">All Product</h1>
+                <h1 className=" text-xl text-blue-400 font-bold">All Product</h1>
                 {/* Add Product Button  */}
                 <Link to={'/addproduct'}>
-                    <button className="px-5 py-2 bg-pink-50 border border-pink-100 rounded-lg">Add Product</button>
+                    <button className="px-5 py-2 bg-blue-200 border border-blue-300 rounded-lg cursor-pointer hover:bg-blue-300">Add Product</button>
                 </Link>
             </div>
             {/* Loading  */}
@@ -42,7 +42,7 @@ const ProductDetail = () => {
             {/* table  */}
             <div className="w-full overflow-x-auto mb-5">
 
-                <table className="w-full text-left border border-collapse sm:border-separate border-pink-100 text-pink-400" >
+                <table className="w-full text-left border border-collapse sm:border-separate border-blue-100 text-blue-500" >
 
                     <tbody>
                         <tr>
@@ -59,7 +59,7 @@ const ProductDetail = () => {
                             const { id, title, price, category, date, productImageUrl } = item
                             return (
                                 <tr key={index} className="text-pink-300">
-                                    <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 ">
+                                    <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-blue-100 stroke-slate-500 text-slate-500 ">
                                         {index + 1}.
                                     </td>
                                     <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 first-letter:uppercase ">

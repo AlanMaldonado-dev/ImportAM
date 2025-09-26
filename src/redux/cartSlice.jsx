@@ -36,11 +36,15 @@ const cartSlice = createSlice({
           : item
       );
     },
+
+    clearCart: () => {
+      return []; // devuelve un array vacío
+    },
   },
 });
 
 // Exportar acciones
-export const { addToCart, deleteFromCart, incrementQuantity, decrementQuantity } = cartSlice.actions;
+export const { addToCart, deleteFromCart, incrementQuantity, decrementQuantity,clearCart } = cartSlice.actions;
 
 // Exportar reducer
 export default cartSlice.reducer;

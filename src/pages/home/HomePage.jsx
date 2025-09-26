@@ -11,6 +11,8 @@ const HomePage = () => {
       <HeroSection/>
       <Category/>
       <HomePageProductCard/>
+      {/* <Track/>
+      <Testimonial/> */}
     </Layout>
   )
 }
