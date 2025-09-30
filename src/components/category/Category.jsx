@@ -12,7 +12,7 @@ import {
 
 const category = [
   { icon: faWind, name: 'perfumes' },
-  { icon: faSmoking, name: 'Vapes' },
+  { icon: faSmoking, name: 'vapes' },
 //   { icon: faUserTie, name: 'jacket' },
   { icon: faMobileScreenButton, name: 'mobile' },
   { icon: faLaptop, name: 'laptop' },

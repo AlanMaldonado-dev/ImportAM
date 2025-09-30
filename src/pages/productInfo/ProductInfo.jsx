@@ -8,6 +8,7 @@ import Loader from "../../components/loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, deleteFromCart } from "../../redux/cartSlice";
 import toast from "react-hot-toast";
+import { FaShoppingCart } from 'react-icons/fa';
 
 const ProductInfo = () => {
     const context = useContext(myContext);
@@ -114,25 +115,18 @@ const ProductInfo = () => {
                                                 ?
                                                 <button
                                                     onClick={() => deleteCart(product)}
-                                                    className="w-full px-4 py-3 text-center text-white bg-red-500 border border--600  hover:bg-red-600 hover:text-gray-100  rounded-xl"
+                                                    className="w-full px-4 py-3 text-center text-white bg-red-600 border border--600  hover:bg-red-600 hover:text-gray-100  rounded-xl cursor-pointer flex items-center justify-center"
                                                 >
-                                                    Borrar del carrito
+                                                    Borrar del carrito  <FaShoppingCart size={15} color="#fff" />
                                                 </button>
                                                 :
                                                 <button
                                                     onClick={() => addCart(product)}
-                                                    className="w-full px-4 py-3 text-center text-white bg-[#ff2301] border border-transparent  hover:bg-white hover:text-[#000000] rounded-xl"
+                                                    className="w-full px-4 py-3 text-center text-white bg-[#ff2301] border border-transparent  hover:bg-red-600 hover:text-[#000000] rounded-xl cursor-pointer flex items-center justify-center"
                                                 >
-                                                    Agregar al carrito
+                                                    Agregar al carrito  <FaShoppingCart size={15} color="#fff" />
                                                 </button>
                                             }
-                                        </div>
-                                        <div className="flex gap-4 mb-6">
-                                            <button
-                                                className="w-full px-4 py-3 text-center text-gray-100 bg-[#ff2301] border border-transparent hover:border-transparent dark:border-gray-700 hover:border-pink-500 hover:text-black hover:bg-white rounded-xl cursor-pointer"
-                                            >
-                                                Comprar
-                                            </button>
                                         </div>
                                     </div>
                                 </div>

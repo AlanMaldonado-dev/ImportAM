@@ -9,16 +9,14 @@ const UserDashboard = () => {
 
     const context = useContext(myContext);
     const { loading, getAllOrder } = context
-    // console.log(getAllOrder)
 
-    // console.log(user)
     return (
         <Layout>
             <div className=" container mx-auto px-4 py-5 lg:py-8">
                 {/* Top  */}
                 <div className="top ">
                     {/* main  */}
-                    <div className=" bg-pink-50 py-5 rounded-xl border border-pink-100">
+                    <div className=" bg-blue-50 py-5 rounded-xl border border-blue-100">
                         {/* image  */}
                         <div className="flex justify-center">
                             <img src="https://cdn-icons-png.flaticon.com/128/2202/2202112.png" alt="" />
@@ -65,7 +63,6 @@ const UserDashboard = () => {
 
                         {/* main 2 */}
                         {getAllOrder.filter((obj) => obj.userid === user?.uid).map((order, index) => {
-                            // console.log(order);
                             return (
                                 <div key={index}>
                                     {order.cartItems.map((item, index) => {
@@ -74,9 +71,9 @@ const UserDashboard = () => {
                                         // console.log('order', order)
                                         const { status } = order
                                         return (
-                                            <div key={index} className="mt-5 flex flex-col overflow-hidden rounded-xl border border-pink-100 md:flex-row">
+                                            <div key={index} className="mt-5 flex flex-col overflow-hidden rounded-xl border border-blue-100 md:flex-row">
                                                 {/* main 3  */}
-                                                <div className="w-full border-r border-pink-100 bg-pink-50 md:max-w-xs">
+                                                <div className="w-full border-r border-blue-100 bg-blue-50 md:max-w-xs">
                                                     {/* left  */}
                                                     <div className="p-8">
                                                         <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-1">
@@ -92,7 +89,7 @@ const UserDashboard = () => {
 
                                                             <div className="mb-4">
                                                                 <div className="text-sm font-semibold">Total Amount</div>
-                                                                <div className="text-sm font-medium text-gray-900">₹ {price * quantity}</div>
+                                                                <div className="text-sm font-medium text-gray-900">$ {price * quantity}</div>
                                                             </div>
 
                                                             <div className="mb-4">
@@ -125,12 +122,12 @@ const UserDashboard = () => {
                                                                             <p className="mt-1.5 text-sm font-medium text-gray-500">{category}</p>
                                                                         </div>
 
-                                                                        <p className="mt-4 text-sm font-medium text-gray-500">x {quantity}</p>
+                                                                        <p className="mt-4 text-sm font-medium text-black-500">x {quantity}</p>
                                                                     </div>
                                                                 </div>
 
                                                                 <div className="ml-auto flex flex-col items-end justify-between">
-                                                                    <p className="text-right text-sm font-bold text-gray-900">₹ {price}</p>
+                                                                    <p className="text-right text-sm font-bold text-gray-900">$ {price}</p>
                                                                 </div>
                                                             </li>
                                                         </ul>

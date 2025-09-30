@@ -5,9 +5,9 @@ const OrderItem = ({ order }) => {
   const { id, date, status } = order;
 
   return (
-    <div className="mt-5 flex flex-col overflow-hidden rounded-xl border border-pink-100 md:flex-row">
+    <div className="mt-5 flex flex-col overflow-hidden rounded-xl border border-blue-100 md:flex-row">
       {/* Left: Order Info */}
-      <div className="w-full border-r border-pink-100 bg-pink-50 md:max-w-xs">
+      <div className="w-full border-r border-blue-100 bg-blue-50 md:max-w-xs">
         <div className="p-8">
           <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-1">
             <div className="mb-4">
