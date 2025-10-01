@@ -25,7 +25,7 @@ const Category = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col mt-5">
+    <div className="flex flex-col mt-5 justify-center items-center">
       <div >
         <div className="flex justify-between mx-10">
           {category.map((item, index) => (

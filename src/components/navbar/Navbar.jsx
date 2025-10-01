@@ -22,7 +22,7 @@ const Navbar = () => {
 
     // navList Data
     const navList = (
-        <ul className="flex space-x-3 text-white font-medium text-md px-5 items-center">
+        <ul className="flex space-x-3 text-white font-medium text-md px-5 items-center justify-center flex-col md:flex-row">
             {/* Home */}
             <li>
                 <Link to={'/'}>Inicio</Link>
@@ -70,9 +70,9 @@ const Navbar = () => {
         </ul>
     )
     return (
-        <nav className="bg-[#000000] sticky top-0">
+        <nav className="bg-[#000000] sticky top-0 place-items-center">
             {/* main  */}
-            <div className="lg:flex lg:justify-between items-center py-3 lg:px-3 ">
+            <div className="lg:flex lg:justify-between items-center py-3 lg:px-3 flex-col">
                 {/* left  */}
                 <div className="left py-3 lg:py-0">
                     <Link to={'/'}>
@@ -81,7 +81,7 @@ const Navbar = () => {
                 </div>
 
                 {/* right  */}
-                <div className="flex justify-center align-center ">
+                <div className="flex">
                     {navList}
                 </div>
 
