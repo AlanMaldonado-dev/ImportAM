@@ -17,7 +17,7 @@ const categoryList = [
     //     name: 'jacket'
     // },
     {
-        name: 'mobile'
+        name: 'telefonos'
     },
     // {
     //     name: 'laptop'
@@ -47,6 +47,7 @@ const AddProductPage = () => {
         productImageUrl: "",
         category: "",
         description: "",
+        stock:"",
         quantity : 1,
         time: Timestamp.now(),
         date: new Date().toLocaleString(
@@ -62,7 +63,7 @@ const AddProductPage = () => {
 
     // Add Product Function
     const addProductFunction = async () => {
-        if (product.title == "" || product.price == "" || product.productImageUrl == "" || product.category == "" || product.description == "") {
+        if (product.title == "" || product.price == "" || product.productImageUrl == "" || product.category == "" || product.description == "" || product.stock == '') {
             return toast.error("all fields are required")
         }
 
@@ -176,6 +177,19 @@ const AddProductPage = () => {
                                     description: e.target.value
                                 })
                             }} name="description" placeholder="Product Description" rows="5" className=" w-full px-2 py-1 text-blue-300 bg-blue-50 border border-blue-200 rounded-md outline-none placeholder-blue-300 ">
+
+                        </textarea>
+                    </div>
+
+                    <div className="mb-3">
+                        <textarea
+                            value={product.stock}
+                            onChange={(e) => {
+                                setProduct({
+                                    ...product,
+                                    stock: e.target.value
+                                })
+                            }} name="stock" placeholder="Product stock" rows="1" className=" w-full px-2 py-1 text-blue-300 bg-blue-50 border border-blue-200 rounded-md outline-none placeholder-blue-300 ">
 
                         </textarea>
                     </div>

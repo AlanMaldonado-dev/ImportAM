@@ -44,6 +44,7 @@ const ProductInfo = () => {
     title: item.title,
     price: item.price,
     productImageUrl: item.productImageUrl,
+    stock:item.stock
   };
 
   dispatch(addToCart(sanitizedItem));
@@ -103,6 +104,10 @@ const ProductInfo = () => {
                                             <p className="inline-block text-2xl font-semibold text-gray-900 dark:text-gray-900 ">
                                                 <span>$ {product?.price}</span>
                                             </p>
+                                        </div>
+                                        <div className="mb-6 ">
+                                            
+                                            <p className="text-black">Stock: {product?.stock}</p>
                                         </div>
                                         <div className="mb-6 ">
                                             

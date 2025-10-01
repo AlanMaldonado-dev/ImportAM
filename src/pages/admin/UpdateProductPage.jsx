@@ -8,30 +8,31 @@ import Loader from "../../components/loader/Loader";
 
 const categoryList = [
     {
-        name: 'fashion'
+        name: 'perfumes'
     },
     {
-        name: 'shirt'
+        name: 'vapes'
     },
+    // {
+    //     name: 'jacket'
+    // },
     {
-        name: 'jacket'
+        name: 'telefonos'
     },
-    {
-        name: 'mobile'
-    },
-    {
-        name: 'laptop'
-    },
+    // {
+    //     name: 'laptop'
+    // },
     {
         name: 'shoes'
     },
     {
         name: 'home'
     },
-    {
-        name: 'books'
-    }
+    // {
+    //     name: 'books'
+    // }
 ]
+
 
 const UpdateProductPage = () => {
     const context = useContext(myContext);
@@ -69,6 +70,7 @@ const UpdateProductPage = () => {
             setProduct({
                 title: product?.title,
                 price: product?.price,
+                stock: product?.stock,
                 productImageUrl: product?.productImageUrl,
                 category: product?.category,
                 description: product?.description,
@@ -189,6 +191,19 @@ const UpdateProductPage = () => {
                         </select>
                     </div>
 
+                    {/* Input Stock  */}
+                    <div className="mb-3">
+                        <textarea
+                            value={product.stock}
+                            onChange={(e) => {
+                                setProduct({
+                                    ...product,
+                                    stock: e.target.value
+                                })
+                            }} name="stock" placeholder="Product stock" rows="1" className=" w-full px-2 py-1 text-blue-300 bg-blue-50 border border-blue-200 rounded-md outline-none placeholder-blue-300 ">
+
+                        </textarea>
+                    </div>
                     {/* Input Five  */}
                     <div className="mb-3">
                         <textarea
